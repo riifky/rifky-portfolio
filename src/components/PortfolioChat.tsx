@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { Bot, X, Send, User, LoaderCircle } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 type Message = {
   role: "user" | "model";
@@ -116,7 +117,28 @@ export default function PortfolioChat() {
                       : "rounded-bl-md border border-gray-200 bg-white text-gray-800"
                   }`}
                 >
-                  {item.text}
+                  <ReactMarkdown
+                    components={{p: ({ children }) => (
+                    <p className="mb-1 last:mb-0">{children}</p>),
+                    strong: ({ children }) => (<strong className="font-semibold">{children}</strong>),
+                      ul: ({ children }) => (<ul className="my-2 list-disc space-y-1 pl-5">{children}</ul>),
+                      ol: ({ children }) => (<ol className="my-2 list-decimal space-y-1 pl-5">{children}</ol>),
+                      a: ({ children, href }) => (
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline"
+                            >
+                              {children}
+                              </a>
+                              ),
+                              }}
+                              >
+                                {item.text}
+                    </ReactMarkdown>
+                  
+
                 </div>
 
                 {item.role === "user" && (
